@@ -2484,42 +2484,6 @@ namespace LenovoYogaToolkit.WPF.Resources {
         }
         
         /// <summary>
-        ///   查找类似 Improve response time of the built-in display. 的本地化字符串。
-        /// </summary>
-        public static string OverDriveAutomationStepControl_Message {
-            get {
-                return ResourceManager.GetString("OverDriveAutomationStepControl_Message", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Over Drive 的本地化字符串。
-        /// </summary>
-        public static string OverDriveAutomationStepControl_Title {
-            get {
-                return ResourceManager.GetString("OverDriveAutomationStepControl_Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Improve response time of the built-in display. 的本地化字符串。
-        /// </summary>
-        public static string OverDriveControl_Message {
-            get {
-                return ResourceManager.GetString("OverDriveControl_Message", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Over Drive 的本地化字符串。
-        /// </summary>
-        public static string OverDriveControl_Title {
-            get {
-                return ResourceManager.GetString("OverDriveControl_Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 {0} downloaded! 的本地化字符串。
         /// </summary>
         public static string PackageControl_DownloadComplete_Message {

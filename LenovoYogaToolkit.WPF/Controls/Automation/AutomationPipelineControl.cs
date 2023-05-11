@@ -308,7 +308,6 @@ public class AutomationPipelineControl : UserControl
             HDRAutomationStep s => new HDRAutomationStepControl(s),
             MicrophoneAutomationStep s => new MicrophoneAutomationStepControl(s),
             OneLevelWhiteKeyboardBacklightAutomationStep s => new OneLevelWhiteKeyboardBacklightAutomationStepControl(s),
-            OverDriveAutomationStep s => new OverDriveAutomationStepControl(s),
             PowerModeAutomationStep s => new PowerModeAutomationStepControl(s),
             RefreshRateAutomationStep s => new RefreshRateAutomationStepControl(s),
             ResolutionAutomationStep s => new ResolutionAutomationStepControl(s),

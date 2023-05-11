@@ -829,19 +829,6 @@
   <data name="Open" xml:space="preserve">
     <value>打开</value>
   </data>
-  <data name="OverDriveAutomationStepControl_Message" xml:space="preserve">
-    <value>开启后通过加压超频提升内置屏幕响应速度，可能会导致屏幕过冲产生鬼影。</value>
-  </data>
-  <data name="OverDriveAutomationStepControl_Title" xml:space="preserve">
-    <value>OverDrive</value>
-  </data>
-  <data name="OverDriveControl_Message" xml:space="preserve">
-    <value>开启后通过加压超频提升内置屏幕响应速度，
-可能会导致屏幕过冲产生鬼影。</value>
-  </data>
-  <data name="OverDriveControl_Title" xml:space="preserve">
-    <value>OverDrive</value>
-  </data>
   <data name="PackageControl_DownloadComplete_Message" xml:space="preserve">
     <value>已下载 {0}</value>
   </data>

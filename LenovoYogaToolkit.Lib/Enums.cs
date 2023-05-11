@@ -211,12 +211,6 @@ public enum OS
     Windows7
 }
 
-public enum OverDriveState
-{
-    Off,
-    On
-}
-
 public enum PowerAdapterStatus
 {
     Connected,

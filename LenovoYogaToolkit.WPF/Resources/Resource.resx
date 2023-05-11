@@ -826,18 +826,6 @@ Enable this option if you have conflicts with full screen applications.</value>
   <data name="Open" xml:space="preserve">
     <value>Open</value>
   </data>
-  <data name="OverDriveAutomationStepControl_Message" xml:space="preserve">
-    <value>Improve response time of the built-in display.</value>
-  </data>
-  <data name="OverDriveAutomationStepControl_Title" xml:space="preserve">
-    <value>Over Drive</value>
-  </data>
-  <data name="OverDriveControl_Message" xml:space="preserve">
-    <value>Improve response time of the built-in display.</value>
-  </data>
-  <data name="OverDriveControl_Title" xml:space="preserve">
-    <value>Over Drive</value>
-  </data>
   <data name="PackageControl_DownloadComplete_Message" xml:space="preserve">
     <value>{0} downloaded!</value>
   </data>

@@ -1,0 +1,207 @@
+﻿<wpfui:UiPage
+    x:Class="LenovoYogaToolkit.WPF.Pages.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:LenovoYogaToolkit.WPF.Controls"
+    xmlns:resources="clr-namespace:LenovoYogaToolkit.WPF.Resources"
+    xmlns:utils="clr-namespace:LenovoYogaToolkit.WPF.Utils"
+    xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="{x:Static resources:Resource.SettingsPage_Title}"
+    FlowDirection="{x:Static utils:LocalizationHelper.Direction}"
+    Scrollable="True">
+
+    <StackPanel Margin="0,0,16,12">
+
+        <TextBlock
+            Margin="0,16,0,24"
+            FontSize="24"
+            FontWeight="Medium"
+            Text="{x:Static resources:Resource.SettingsPage_Title}" />
+
+        <wpfui:CardControl
+            x:Name="_langCardControl"
+            Margin="0,0,0,8"
+            Icon="LocalLanguage24">
+            <wpfui:CardControl.Header>
+                <controls:CardHeaderControl Title="{x:Static resources:Resource.SettingsPage_Language_Title}" Subtitle="{x:Static resources:Resource.SettingsPage_Language_Message}" />
+            </wpfui:CardControl.Header>
+            <ComboBox
+                x:Name="_langComboBox"
+                MinWidth="160"
+                Margin="0,0,0,8"
+                MaxDropDownHeight="Auto"
+                SelectionChanged="LangComboBox_SelectionChanged"
+                Visibility="Hidden" />
+        </wpfui:CardControl>
+
+        <wpfui:CardControl Margin="0,0,0,8" Icon="DarkTheme24">
+            <wpfui:CardControl.Header>
+                <controls:CardHeaderControl Title="{x:Static resources:Resource.SettingsPage_Theme_Title}" Subtitle="{x:Static resources:Resource.SettingsPage_Theme_Description}" />
+            </wpfui:CardControl.Header>
+            <ComboBox
+                x:Name="_themeComboBox"
+                MinWidth="160"
+                Margin="0,0,0,8"
+                MaxDropDownHeight="Auto"
+                SelectionChanged="ThemeComboBox_SelectionChanged"
+                Visibility="Hidden" />
+        </wpfui:CardControl>
+
+        <wpfui:CardControl Margin="0,0,0,8" Icon="Color24">
+            <wpfui:CardControl.Header>
+                <controls:CardHeaderControl Title="{x:Static resources:Resource.SettingsPage_AccentColor_Title}" Subtitle="{x:Static resources:Resource.SettingsPage_AccentColor_Description}" />
+            </wpfui:CardControl.Header>
+            <StackPanel Orientation="Horizontal">
+                <controls:ColorPickerControl x:Name="_accentColorPicker" ColorChangedDelayed="AccentColorPicker_Changed" />
+                <ComboBox
+                    x:Name="_accentColorSourceComboBox"
+                    MinWidth="160"
+                    Margin="8,0,0,0"
+                    MaxDropDownHeight="Auto"
+                    SelectionChanged="AccentColorSourceComboBox_SelectionChanged" />
+            </StackPanel>
+        </wpfui:CardControl>
+
+        <wpfui:CardControl Margin="0,0,0,24" Icon="ColorBackground24">
+            <wpfui:CardControl.Header>
+                <controls:CardHeaderControl Title="{x:Static resources:Resource.SettingsPage_AppBackground_Title}" Subtitle="{x:Static resources:Resource.SettingsPage_AppBackground_Description}"/>
+            </wpfui:CardControl.Header>
+            <ComboBox
+                    x:Name="_appBackgroundComboBox"
+                    MinWidth="160"
+                    Margin="8,0,0,0"
+                    MaxDropDownHeight="Auto"
+                    SelectionChanged="AppBackgroundComboBox_SelectionChanged" />
+        </wpfui:CardControl>
+
+        <wpfui:CardControl Margin="0,0,0,8">
+            <wpfui:CardControl.Header>
+                <controls:CardHeaderControl Title="{x:Static resources:Resource.SettingsPage_Autorun_Title}" Subtitle="{x:Static resources:Resource.SettingsPage_Autorun_Message}" />
+            </wpfui:CardControl.Header>
+            <ComboBox
+                x:Name="_autorunComboBox"
+                MinWidth="160"
+                Margin="0,0,0,8"
+                MaxDropDownHeight="Auto"
+                SelectionChanged="AutorunComboBox_SelectionChanged"
+                Visibility="Hidden" />
+        </wpfui:CardControl>
+
+        <wpfui:CardControl Margin="0,0,0,24">
+            <wpfui:CardControl.Header>
+                <controls:CardHeaderControl Title="{x:Static resources:Resource.SettingsPage_MinimizeOnClose_Title}" Subtitle="{x:Static resources:Resource.SettingsPage_MinimizeOnClose_Message}" />
+            </wpfui:CardControl.Header>
+            <wpfui:ToggleSwitch
+                x:Name="_minimizeOnCloseToggle"
+                Margin="0,0,0,8"
+                Click="MinimizeOnCloseToggle_Click"
+                Visibility="Hidden" />
+        </wpfui:CardControl>
+
+        <wpfui:CardControl x:Name="_vantageCard" Margin="0,0,0,8">
+            <wpfui:CardControl.Header>
+                <controls:CardHeaderControl Title="{x:Static resources:Resource.SettingsPage_DisableVantage_Title}" Subtitle="{x:Static resources:Resource.SettingsPage_DisableVantage_Message}" />
+            </wpfui:CardControl.Header>
+            <wpfui:ToggleSwitch
+                x:Name="_vantageToggle"
+                Margin="0,0,0,8"
+                Click="VantageToggle_Click"
+                Visibility="Hidden" />
+        </wpfui:CardControl>
+
+        <wpfui:CardControl x:Name="_legionZoneCard" Margin="0,0,0,8">
+            <wpfui:CardControl.Header>
+                <controls:CardHeaderControl Title="{x:Static resources:Resource.SettingsPage_DisableLegionZone_Title}" Subtitle="{x:Static resources:Resource.SettingsPage_DisableLegionZone_Message}" />
+            </wpfui:CardControl.Header>
+            <wpfui:ToggleSwitch
+                x:Name="_legionZoneToggle"
+                Margin="0,0,0,8"
+                Click="LegionZoneToggle_Click"
+                Visibility="Hidden" />
+        </wpfui:CardControl>
+
+        <wpfui:CardControl x:Name="_fnKeysCard" Margin="0,0,0,24">
+            <wpfui:CardControl.Header>
+                <controls:CardHeaderControl Title="{x:Static resources:Resource.SettingsPage_DisableLenovoHotkeys_Title}" Subtitle="{x:Static resources:Resource.SettingsPage_DisableLenovoHotkeys_Message}" />
+            </wpfui:CardControl.Header>
+            <wpfui:ToggleSwitch
+                x:Name="_fnKeysToggle"
+                Margin="0,0,0,8"
+                Click="FnKeysToggle_Click"
+                Visibility="Hidden" />
+        </wpfui:CardControl>
+
+        <wpfui:CardAction
+            x:Name="_smartKeySinglePressActionCard"
+            Margin="0,0,0,8"
+            Click="SmartKeySinglePressActionCard_Click">
+            <wpfui:CardAction.Content>
+                <controls:CardHeaderControl Title="{x:Static resources:Resource.SettingsPage_SmartKeySinglePressAction_Title}" Subtitle="{x:Static resources:Resource.SettingsPage_SmartKeySinglePressAction_Message}" />
+            </wpfui:CardAction.Content>
+        </wpfui:CardAction>
+
+        <wpfui:CardAction
+            x:Name="_smartKeyDoublePressActionCard"
+            Margin="0,0,0,8"
+            Click="SmartKeyDoublePressActionCard_Click">
+            <wpfui:CardAction.Content>
+                <controls:CardHeaderControl Title="{x:Static resources:Resource.SettingsPage_SmartKeyDoublePressAction_Title}" Subtitle="{x:Static resources:Resource.SettingsPage_SmartKeyDoublePressAction_Message}" />
+            </wpfui:CardAction.Content>
+        </wpfui:CardAction>
+
+        <wpfui:CardAction
+            x:Name="_notificationsCard"
+            Margin="0,0,0,8"
+            Click="NotificationsCard_Click">
+            <wpfui:CardAction.Content>
+                <controls:CardHeaderControl Title="{x:Static resources:Resource.SettingsPage_Notifications_Title}" Subtitle="{x:Static resources:Resource.SettingsPage_Notifications_Message}" />
+            </wpfui:CardAction.Content>
+        </wpfui:CardAction>
+
+        <wpfui:CardAction
+            x:Name="_excludeRefreshRatesCard"
+            Margin="0,0,0,8"
+            Click="ExcludeRefreshRates_Click">
+            <wpfui:CardAction.Content>
+                <controls:CardHeaderControl Title="{x:Static resources:Resource.SettingsPage_ExcludeRefreshRates_Title}" Subtitle="{x:Static resources:Resource.SettingsPage_ExcludeRefreshRates_Message}" />
+            </wpfui:CardAction.Content>
+        </wpfui:CardAction>
+
+        <wpfui:CardControl Margin="0,0,0,8">
+            <wpfui:CardControl.Header>
+                <controls:CardHeaderControl Title="{x:Static resources:Resource.SettingsPage_SynchronizeBrightnessToAllPowerPlans_Title}" Subtitle="{x:Static resources:Resource.SettingsPage_SynchronizeBrightnessToAllPowerPlans_Message}" />
+            </wpfui:CardControl.Header>
+            <wpfui:ToggleSwitch
+                x:Name="_synchronizeBrightnessToAllPowerPlansToggle"
+                Margin="0,0,0,8"
+                Click="SynchronizeBrightnessToAllPowerPlansToggle_Click"
+                Visibility="Hidden" />
+        </wpfui:CardControl>
+
+        <TextBlock
+            Grid.Row="0"
+            Margin="0,16,0,24"
+            FontSize="24"
+            FontWeight="Medium"
+            Text="{x:Static resources:Resource.SettingsPage_Power_Title}" />
+
+        <wpfui:CardAction
+            x:Name="_powerPlansCard"
+            Margin="0,0,0,8"
+            Click="PowerPlans_Click">
+            <wpfui:CardAction.Content>
+                <controls:CardHeaderControl Title="{x:Static resources:Resource.SettingsPage_PowerPlans_Title}" Subtitle="{x:Static resources:Resource.SettingsPage_PowerPlans_Message}" />
+            </wpfui:CardAction.Content>
+        </wpfui:CardAction>
+
+        <wpfui:CardControl Margin="0,0,0,8" Click="PowerPlansControlPanel_Click">
+            <wpfui:CardControl.Header>
+                <controls:CardHeaderControl Title="{x:Static resources:Resource.SettingsPage_PowerPlansControlPanel_Title}" />
+            </wpfui:CardControl.Header>
+            <wpfui:SymbolIcon
+                Margin="4,0,0,0"
+                FontSize="20"
+                Symbol="Open24" />
+        </wpfui:CardControl>
+    </StackPanel>
+</wpfui:UiPage>

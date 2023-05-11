@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LenovoYogaToolkit.WPF", "LenovoYogaToolkit.WPF\LenovoYogaToolkit.WPF.csproj", "{DC01FDB3-CDCF-4D08-B87E-CCCAE5A24FF7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LenovoYogaToolkit.Lib", "LenovoYogaToolkit.Lib\LenovoYogaToolkit.Lib.csproj", "{4B902DDC-0EBE-44B3-A53B-5EA176C7522B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LenovoYogaToolkit.Lib.Automation", "LenovoYogaToolkit.Lib.Automation\LenovoYogaToolkit.Lib.Automation.csproj", "{CB52B339-4311-47C9-B9EB-23643F10BEC9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DC01FDB3-CDCF-4D08-B87E-CCCAE5A24FF7}.Debug|x64.ActiveCfg = Debug|x64
+		{DC01FDB3-CDCF-4D08-B87E-CCCAE5A24FF7}.Debug|x64.Build.0 = Debug|x64
+		{DC01FDB3-CDCF-4D08-B87E-CCCAE5A24FF7}.Release|x64.ActiveCfg = Release|x64
+		{DC01FDB3-CDCF-4D08-B87E-CCCAE5A24FF7}.Release|x64.Build.0 = Release|x64
+		{4B902DDC-0EBE-44B3-A53B-5EA176C7522B}.Debug|x64.ActiveCfg = Debug|x64
+		{4B902DDC-0EBE-44B3-A53B-5EA176C7522B}.Debug|x64.Build.0 = Debug|x64
+		{4B902DDC-0EBE-44B3-A53B-5EA176C7522B}.Release|x64.ActiveCfg = Release|x64
+		{4B902DDC-0EBE-44B3-A53B-5EA176C7522B}.Release|x64.Build.0 = Release|x64
+		{CB52B339-4311-47C9-B9EB-23643F10BEC9}.Debug|x64.ActiveCfg = Debug|x64
+		{CB52B339-4311-47C9-B9EB-23643F10BEC9}.Debug|x64.Build.0 = Debug|x64
+		{CB52B339-4311-47C9-B9EB-23643F10BEC9}.Release|x64.ActiveCfg = Release|x64
+		{CB52B339-4311-47C9-B9EB-23643F10BEC9}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DA77E337-1B57-4D70-B454-BE5EA6E618D6}
+	EndGlobalSection
+EndGlobal

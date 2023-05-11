@@ -1,0 +1,25 @@
+﻿using System;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+namespace LenovoYogaToolkit.Lib.Automation.Steps;
+
+public class DelayAutomationStep : IAutomationStep<Delay>
+{
+    public Delay State { get; }
+
+    [JsonConstructor]
+    public DelayAutomationStep(Delay state) => State = state;
+
+    public Task<bool> IsSupportedAsync() => Task.FromResult(true);
+
+    public Task<Delay[]> GetAllStatesAsync() => Task.FromResult(new Delay[] {
+        new(1),
+        new(2),
+        new(3),
+    });
+
+    public IAutomationStep DeepCopy() => new DelayAutomationStep(State);
+
+    public Task RunAsync() => Task.Delay(TimeSpan.FromSeconds(State.DelaySeconds));
+}

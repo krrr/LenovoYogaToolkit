@@ -1,0 +1,17 @@
+﻿using System;
+using System.Threading.Tasks;
+
+namespace LenovoYogaToolkit.Lib.Utils;
+
+public class LambdaAsyncDisposable : IAsyncDisposable
+{
+    private readonly Func<Task> _action;
+
+    public LambdaAsyncDisposable(Func<Task> action) => _action = action;
+
+    public async ValueTask DisposeAsync()
+    {
+        GC.SuppressFinalize(this);
+        await _action();
+    }
+}

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "LenovoYogaToolkit.WPF": {
+      "commandName": "Project",
+      "commandLineArgs": "--trace"
+    }
+  }
+}

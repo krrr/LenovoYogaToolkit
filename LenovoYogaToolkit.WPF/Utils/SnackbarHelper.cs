@@ -1,0 +1,37 @@
+﻿using System.Threading.Tasks;
+using System.Windows;
+using LenovoYogaToolkit.WPF.Windows;
+using Wpf.Ui.Common;
+
+namespace LenovoYogaToolkit.WPF.Utils;
+
+public static class SnackbarHelper
+{
+    public static async Task ShowAsync(string title, string message, bool isError = false)
+    {
+        var mainWindow = Application.Current.MainWindow as MainWindow;
+        var snackBar = mainWindow?.Snackbar;
+
+        if (snackBar is null)
+            return;
+
+        snackBar.Icon = isError ? SymbolRegular.ErrorCircle24 : SymbolRegular.Checkmark24;
+        snackBar.Timeout = isError ? 5000 : 2000;
+        snackBar.CloseButtonEnabled = isError;
+        await snackBar.ShowAsync(title, message);
+    }
+
+    public static void Show(string title, string message, bool isError = false)
+    {
+        var mainWindow = Application.Current.MainWindow as MainWindow;
+        var snackBar = mainWindow?.Snackbar;
+
+        if (snackBar is null)
+            return;
+
+        snackBar.Icon = isError ? SymbolRegular.ErrorCircle24 : SymbolRegular.Checkmark24;
+        snackBar.Timeout = isError ? 5000 : 2000;
+        snackBar.CloseButtonEnabled = isError;
+        snackBar.Show(title, message);
+    }
+}

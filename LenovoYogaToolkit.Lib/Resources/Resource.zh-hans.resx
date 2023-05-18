@@ -202,13 +202,13 @@
     <value>右上角</value>
   </data>
   <data name="PowerModeState_Balance" xml:space="preserve">
-    <value>均衡模式</value>
+    <value>智能模式</value>
   </data>
   <data name="PowerModeState_Performance" xml:space="preserve">
     <value>野兽模式</value>
   </data>
   <data name="PowerModeState_Quiet" xml:space="preserve">
-    <value>安静模式</value>
+    <value>节能模式</value>
   </data>
   <data name="Theme_Dark" xml:space="preserve">
     <value>深色模式</value>

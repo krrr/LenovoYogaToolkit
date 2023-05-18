@@ -66,8 +66,6 @@ public partial class App
             new IoCModule()
         );
 
-        IoCContainer.Resolve<PowerModeFeature>().AllowAllPowerModesOnBattery = flags.AllowAllPowerModesOnBattery;
-
         await InitPowerModeFeatureAsync();
         await InitBatteryFeatureAsync();
         await InitAutomationProcessorAsync();

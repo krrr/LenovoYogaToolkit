@@ -55,7 +55,6 @@ public static class Compatibility {
                     SupportsAlwaysOnAc = GetAlwaysOnAcStatus(),
                     SupportsExtendedHybridMode = await GetSupportsExtendedHybridModeAsync().ConfigureAwait(false),
                     SupportsIntelligentSubMode = await GetSupportsIntelligentSubModeAsync().ConfigureAwait(false),
-                    HasQuietToPerformanceModeSwitchingBug = GetHasQuietToPerformanceModeSwitchingBug(biosVersion),
                 }
             };
 
@@ -69,7 +68,6 @@ public static class Compatibility {
                 Log.Instance.Trace($" * Properties.SupportsAlwaysOnAc: '{machineInformation.Properties.SupportsAlwaysOnAc.status}, {machineInformation.Properties.SupportsAlwaysOnAc.connectivity}'");
                 Log.Instance.Trace($" * Properties.SupportsExtendedHybridMode: '{machineInformation.Properties.SupportsExtendedHybridMode}'");
                 Log.Instance.Trace($" * Properties.SupportsIntelligentSubMode: '{machineInformation.Properties.SupportsIntelligentSubMode}'");
-                Log.Instance.Trace($" * Properties.HasQuietToPerformanceModeSwitchingBug: '{machineInformation.Properties.HasQuietToPerformanceModeSwitchingBug}'");
             }
 
             _machineInformation = machineInformation;
@@ -137,15 +135,6 @@ public static class Compatibility {
             $"SELECT * FROM Win32_BIOS",
             pdc => (string)pdc["Name"].Value).ConfigureAwait(false);
         return result.First();
-    }
-
-    private static bool GetHasQuietToPerformanceModeSwitchingBug(string biosVersion) {
-        (string, int?)[] affectedBiosList =
-        {
-            ("J2CN", null)
-        };
-
-        return IsBiosVersionMatch(biosVersion, affectedBiosList);
     }
 
     private static bool IsBiosVersionMatch(string currentBiosVersionString, (string, int?)[] biosVersions) {

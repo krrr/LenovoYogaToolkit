@@ -1,67 +1,88 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using LenovoYogaToolkit.Lib.Controllers;
 using LenovoYogaToolkit.Lib.Listeners;
-using LenovoYogaToolkit.Lib.System;
-using LenovoYogaToolkit.Lib.Utils;
 
 namespace LenovoYogaToolkit.Lib.Features;
 
-public class PowerModeFeature : AbstractLenovoGamezoneWmiFeature<PowerModeState>
-{
+public class PowerModeFeature : IFeature<PowerModeState> {
+    private const string REG_KEY = "SYSTEM\\CurrentControlSet\\Services\\LITSSVC\\LNBITS\\IC\\MMC";
+
     private readonly AIModeController _aiModeController;
     private readonly PowerPlanController _powerPlanController;
-    private readonly ThermalModeListener _thermalModeListener;
     private readonly PowerModeListener _powerModeListener;
-
-    public bool AllowAllPowerModesOnBattery { get; set; }
 
     public PowerModeFeature(
         AIModeController aiModeController,
         PowerPlanController powerPlanController,
-        ThermalModeListener thermalModeListener,
         PowerModeListener powerModeListener
-        ) : base("SmartFanMode", 1, "IsSupportSmartFan")
-    {
+        ) {
         _aiModeController = aiModeController ?? throw new ArgumentNullException(nameof(aiModeController));
         _powerPlanController = powerPlanController ?? throw new ArgumentNullException(nameof(powerPlanController));
-        _thermalModeListener = thermalModeListener ?? throw new ArgumentNullException(nameof(thermalModeListener));
         _powerModeListener = powerModeListener ?? throw new ArgumentNullException(nameof(powerModeListener));
     }
 
-    public override async Task<PowerModeState[]> GetAllStatesAsync() {
-        return new[] { PowerModeState.Quiet, PowerModeState.Balance, PowerModeState.Performance };
+    public async Task<bool> IsSupportedAsync() => ITSService.IsSupported() && (await GetAllStatesAsync().ConfigureAwait(false)).Length > 1;
+
+    public async Task<PowerModeState[]> GetAllStatesAsync() {
+        var modes = new List<PowerModeState>();
+        try {
+            using var hkey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(REG_KEY);
+            var capability = (int)hkey.GetValue("Capability")!;
+            if ((capability & 1) == 0)
+                modes.Add(PowerModeState.Balance);
+            if ((capability & 2) != 0)
+                modes.Add(PowerModeState.Quiet);
+            if ((capability & 8) != 0)
+                modes.Add(PowerModeState.Performance);
+        } catch {
+        }
+        return modes.ToArray();
     }
 
-    public override async Task SetStateAsync(PowerModeState state)
-    {
-        var allStates = await GetAllStatesAsync().ConfigureAwait(false);
-        if (!allStates.Contains(state))
-            throw new InvalidOperationException($"Unsupported power mode {state}.");
-
-        if (state is PowerModeState.Performance 
-            && !AllowAllPowerModesOnBattery
-            && await Power.IsPowerAdapterConnectedAsync() is PowerAdapterStatus.Disconnected)
-            throw new InvalidOperationException($"Can't switch to {state} power mode on battery."); ;
-
-        var currentState = await GetStateAsync().ConfigureAwait(false);
-
-        await _aiModeController.StopAsync(currentState).ConfigureAwait(false);
-
-        var mi = await Compatibility.GetMachineInformationAsync().ConfigureAwait(false);
-
-        if (mi.Properties.HasQuietToPerformanceModeSwitchingBug && currentState == PowerModeState.Quiet && state == PowerModeState.Performance)
-        {
-            _thermalModeListener.SuppressNext();
-            await base.SetStateAsync(PowerModeState.Balance).ConfigureAwait(false);
-            await Task.Delay(TimeSpan.FromMilliseconds(500)).ConfigureAwait(false);
+    public Task<PowerModeState> GetStateAsync() {
+        using var hkey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(REG_KEY);
+        if (hkey == null) throw new Exception("ITSService registry key not exists");
+        var automode = (int)hkey.GetValue("AutomaticModeSetting")!;
+        if (automode == 2) {
+            return Task.FromResult(PowerModeState.Balance);
+        } else if (automode == 1) {
+            var current = (int)hkey.GetValue("CurrentSetting")!;
+            return Task.FromResult(current switch {
+                1 => PowerModeState.Quiet,
+                3 => PowerModeState.Performance,
+                _ => throw new Exception("unknown mode"),
+            });
+        } else {
+            throw new Exception("unknown auto mode value");
         }
+    }
 
-        _thermalModeListener.SuppressNext();
-        await base.SetStateAsync(state).ConfigureAwait(false);
+    public async Task SetStateAsync(PowerModeState mode) {
+        var allStates = await GetAllStatesAsync().ConfigureAwait(false);
+        if (!allStates.Contains(mode))
+            throw new InvalidOperationException($"Unsupported power mode {mode}.");
 
-        await _powerModeListener.NotifyAsync(state).ConfigureAwait(false);
+        //var currentState = await GetStateAsync().ConfigureAwait(false);
+        //await _aiModeController.StopAsync(currentState).ConfigureAwait(false);
+
+        var controlcode = mode switch {
+            //PowerModeState.None => 0x86,
+            PowerModeState.Balance => 0x87,
+            PowerModeState.Quiet => 0x92,
+            PowerModeState.Performance => 0x94,
+            _ => throw new ArgumentException("invalid mode", nameof(mode))
+        };
+        using var svc = ITSService.OpenService();
+        if (svc == null) {
+            throw new Exception("failed to get ITSService");
+        }
+        svc.ExecuteCommand(controlcode);
+
+        await _powerModeListener.NotifyAsync(mode).ConfigureAwait(false);
     }
 
     public async Task EnsureCorrectPowerPlanIsSetAsync()

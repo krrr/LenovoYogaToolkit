@@ -12,7 +12,6 @@ public class Flags
     public bool Minimized { get; }
     public bool SkipCompatibilityCheck { get; }
     public bool DisableTrayTooltip { get; }
-    public bool AllowAllPowerModesOnBattery { get; }
 
     public Flags(IEnumerable<string> startupArgs)
     {
@@ -22,7 +21,6 @@ public class Flags
         Minimized = args.Contains("--minimized");
         SkipCompatibilityCheck = args.Contains("--skip-compat-check");
         DisableTrayTooltip = args.Contains("--disable-tray-tooltip");
-        AllowAllPowerModesOnBattery = args.Contains("--allow-all-power-modes-on-battery");
     }
 
     private static IEnumerable<string> LoadExternalArgs()

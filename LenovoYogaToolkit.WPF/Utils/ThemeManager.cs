@@ -1,11 +1,13 @@
-﻿using System;
-using System.Windows;
-using LenovoYogaToolkit.Lib;
+﻿using LenovoYogaToolkit.Lib;
 using LenovoYogaToolkit.Lib.Listeners;
 using LenovoYogaToolkit.Lib.Settings;
 using LenovoYogaToolkit.Lib.System;
 using LenovoYogaToolkit.Lib.Utils;
 using LenovoYogaToolkit.WPF.Extensions;
+using NvAPIWrapper.Native;
+using System;
+using System.Runtime.InteropServices;
+using System.Windows;
 
 namespace LenovoYogaToolkit.WPF.Utils;
 
@@ -14,6 +16,7 @@ public class ThemeManager {
 
     private readonly ApplicationSettings _settings;
     private readonly SystemThemeListener _listener;
+    public static readonly int DWMWA_CAPTION_COLOR = 35;
 
     public event EventHandler? ThemeApplied;
 
@@ -25,9 +28,9 @@ public class ThemeManager {
     }
 
     public void Apply() {
-        SetBackdropType();
         SetTheme();
         SetColor();
+        ((Wpf.Ui.Controls.UiWindow)Application.Current.MainWindow).WindowBackdropType = GetBackgroundType();
 
         ThemeApplied?.Invoke(this, EventArgs.Empty);
     }
@@ -76,11 +79,8 @@ public class ThemeManager {
         var theme = IsDarkMode() ? Wpf.Ui.Appearance.ThemeType.Dark : Wpf.Ui.Appearance.ThemeType.Light;
         Wpf.Ui.Appearance.Theme.Apply(theme, GetBackgroundType(), false);
     }
-    private void SetBackdropType() {
-        ((Wpf.Ui.Controls.UiWindow)Application.Current.MainWindow).WindowBackdropType = GetBackgroundType();
-    }
 
-    private Wpf.Ui.Appearance.BackgroundType GetBackgroundType() {
+    public Wpf.Ui.Appearance.BackgroundType GetBackgroundType() {
         return _settings.Store.AppBackground switch {
             AppBackground.Acrylic => Wpf.Ui.Appearance.BackgroundType.Acrylic,
             AppBackground.Mica => Wpf.Ui.Appearance.BackgroundType.Mica,
@@ -95,4 +95,7 @@ public class ThemeManager {
             secondaryAccent: accentColor,
             tertiaryAccent: accentColor);
     }
+
+    [DllImport("dwmapi.dll")]
+    public static extern int DwmSetWindowAttribute([In] IntPtr hWnd, [In] int dwAttribute, [In] ref int pvAttribute, [In] int cbAttribute);
 }

@@ -34,17 +34,17 @@ public partial class MainWindow
         InitializeComponent();
 
 #if DEBUG
-        _title.Text += " [DEBUG]";
+        _titleBar.Title += " [DEBUG]";
 #else
         var version = System.Reflection.Assembly.GetEntryAssembly()?.GetName().Version;
         if (version == new Version(0, 0, 1, 0) || version?.Build == 99)
-            _title.Text += " [BETA]";
+            _titleBar.Title += " [BETA]";
 #endif
 
 
         if (Log.Instance.IsTraceEnabled)
         {
-            _title.Text += " [LOGGING ENABLED]";
+            _titleBar.Title += " [LOGGING ENABLED]";
             _openLogIndicator.Visibility = Visibility.Visible;
         }
     }

@@ -132,14 +132,6 @@ public partial class MainWindow
         }
     }
 
-    private void MainWindow_IsVisibleChanged(object _1, DependencyPropertyChangedEventArgs _2)
-    {
-        if (!IsVisible)
-            return;
-
-        CheckForUpdates();
-    }
-
     private void OpenLogIndicator_Click(object sender, MouseButtonEventArgs e)
     {
         try

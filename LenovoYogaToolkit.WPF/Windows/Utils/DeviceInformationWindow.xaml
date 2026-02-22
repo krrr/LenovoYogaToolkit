@@ -61,34 +61,34 @@
                     <wpfui:CardControl.Header>
                         <controls:CardHeaderControl Title="{x:Static resources:Resource.DeviceInformationWindow_Manufacturer_Title}" />
                     </wpfui:CardControl.Header>
-                    <Label x:Name="_manufacturerLabel" />
+                    <Label x:Name="_manufacturerLabel"  Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
                 </wpfui:CardControl>
 
                 <wpfui:CardControl Margin="0,0,0,8" Click="DeviceCardControl_Click">
                     <wpfui:CardControl.Header>
                         <controls:CardHeaderControl Title="{x:Static resources:Resource.DeviceInformationWindow_Model_Title}" />
                     </wpfui:CardControl.Header>
-                    <Label x:Name="_modelLabel" />
+                    <Label x:Name="_modelLabel"  Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
                 </wpfui:CardControl>
 
                 <wpfui:CardControl Margin="0,0,0,8" Click="DeviceCardControl_Click">
                     <wpfui:CardControl.Header>
                         <controls:CardHeaderControl Title="{x:Static resources:Resource.DeviceInformationWindow_MachineType_Title}" />
                     </wpfui:CardControl.Header>
-                    <Label x:Name="_mtmLabel" />
+                    <Label x:Name="_mtmLabel"  Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
                 </wpfui:CardControl>
                 <wpfui:CardControl Margin="0,0,0,8" Click="DeviceCardControl_Click">
                     <wpfui:CardControl.Header>
                         <controls:CardHeaderControl Title="{x:Static resources:Resource.DeviceInformationWindow_SerialNumber_Title}" />
                     </wpfui:CardControl.Header>
-                    <Label x:Name="_serialNumberLabel" />
+                    <Label x:Name="_serialNumberLabel" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
                 </wpfui:CardControl>
 
                 <wpfui:CardControl Margin="0,0,0,8" Click="DeviceCardControl_Click">
                     <wpfui:CardControl.Header>
                         <controls:CardHeaderControl Title="{x:Static resources:Resource.DeviceInformationWindow_BiosVersion_Title}" />
                     </wpfui:CardControl.Header>
-                    <Label x:Name="_biosLabel" />
+                    <Label x:Name="_biosLabel"  Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
                 </wpfui:CardControl>
 
                 <Grid Margin="0,16,0,24">
@@ -114,21 +114,21 @@
                     <wpfui:CardControl.Header>
                         <controls:CardHeaderControl Title="{x:Static resources:Resource.DeviceInformationWindow_WarrantyStatus_Title}" />
                     </wpfui:CardControl.Header>
-                    <Label x:Name="_warrantyStatusLabel" Content="-" />
+                    <Label x:Name="_warrantyStatusLabel" Content="-"  Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
                 </wpfui:CardControl>
 
                 <wpfui:CardControl Margin="0,0,0,8">
                     <wpfui:CardControl.Header>
                         <controls:CardHeaderControl Title="{x:Static resources:Resource.DeviceInformationWindow_WarrantyStartDate_Title}" />
                     </wpfui:CardControl.Header>
-                    <Label x:Name="_warrantyStartLabel" Content="-" />
+                    <Label x:Name="_warrantyStartLabel" Content="-"  Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
                 </wpfui:CardControl>
 
                 <wpfui:CardControl Margin="0,0,0,8">
                     <wpfui:CardControl.Header>
                         <controls:CardHeaderControl Title="{x:Static resources:Resource.DeviceInformationWindow_WarrantyEndDate_Title}" />
                     </wpfui:CardControl.Header>
-                    <Label x:Name="_warrantyEndLabel" Content="-" />
+                    <Label x:Name="_warrantyEndLabel" Content="-"  Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
                 </wpfui:CardControl>
 
 

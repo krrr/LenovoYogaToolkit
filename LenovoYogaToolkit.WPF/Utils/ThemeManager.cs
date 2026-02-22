@@ -8,6 +8,7 @@ using NvAPIWrapper.Native;
 using System;
 using System.Runtime.InteropServices;
 using System.Windows;
+using System.Windows.Media;
 
 namespace LenovoYogaToolkit.WPF.Utils;
 
@@ -78,6 +79,17 @@ public class ThemeManager {
     private void SetTheme() {
         var theme = IsDarkMode() ? Wpf.Ui.Appearance.ThemeType.Dark : Wpf.Ui.Appearance.ThemeType.Light;
         Wpf.Ui.Appearance.Theme.Apply(theme, GetBackgroundType(), false);
+
+        // 默认的文字颜色太淡需要修改
+        // 可能只要启动后改一次就够，先不优化
+        var res = "pack://application:,,,/Wpf.Ui;component/Styles/Theme/Light.xaml";
+        var textFillColorPrimary = Color.FromRgb(0x1b, 0x1b, 0x1a);
+        Console.WriteLine(Application.Current.Resources.MergedDictionaries);
+        SetThemeOverride(res, "TextFillColorPrimary", textFillColorPrimary);
+        SetThemeOverride(res, "TextFillColorPrimaryBrush", new SolidColorBrush(textFillColorPrimary));
+        var textFillColorSecondary = Color.FromRgb(0x60, 0x60, 0x60);
+        SetThemeOverride(res, "TextFillColorSecondary", textFillColorSecondary);
+        SetThemeOverride(res, "TextFillColorSecondaryBrush", new SolidColorBrush(textFillColorSecondary));
     }
 
     public Wpf.Ui.Appearance.BackgroundType GetBackgroundType() {
@@ -98,4 +110,18 @@ public class ThemeManager {
 
     [DllImport("dwmapi.dll")]
     public static extern int DwmSetWindowAttribute([In] IntPtr hWnd, [In] int dwAttribute, [In] ref int pvAttribute, [In] int cbAttribute);
+
+    public void SetThemeOverride(string resourceLookup, string key, object value)
+    {
+        var mergedDicts = Application.Current.Resources.MergedDictionaries;
+
+        foreach (var dict in mergedDicts)
+        {
+            if (dict.Source != null && dict.Source.ToString().Equals(resourceLookup)) // 只在这个特定的字典里覆盖
+            {
+                dict[key] = value;
+                return;
+            }
+        }
+    }
 }
